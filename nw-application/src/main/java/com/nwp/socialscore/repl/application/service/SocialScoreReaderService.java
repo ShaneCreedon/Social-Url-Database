@@ -1,11 +1,13 @@
-package com.nw.socialscore.repl.application.service;
+package com.nwp.socialscore.repl.application.service;
 
-import com.nw.socialscore.repl.application.domain.model.OperationType;
-import com.nw.socialscore.repl.infrastructure.service.SocialScoreValidator;
+import com.nwp.socialscore.repl.application.domain.model.OperationType;
+import com.nwp.socialscore.repl.infrastructure.service.SocialScoreValidator;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class SocialScoreReaderService {
 
     private static final String SINGLE_WHITESPACE = " ";
@@ -13,13 +15,6 @@ public class SocialScoreReaderService {
 
     private final SocialScoreValidator socialScoreValidator;
     private final SocialScoreOperationService socialScoreOperationService;
-
-    // Use Lombok
-    public SocialScoreReaderService(SocialScoreValidator socialScoreValidator,
-                                    SocialScoreOperationService socialScoreOperationService) {
-        this.socialScoreValidator = socialScoreValidator;
-        this.socialScoreOperationService = socialScoreOperationService;
-    }
 
     public void startRepl() {
         Scanner scanner = new Scanner(System.in);
@@ -46,7 +41,7 @@ public class SocialScoreReaderService {
                 socialScoreOperationService.addUrlWithSocialScore(inputList.get(1), inputList.get(2));
                 break;
             case REMOVE:
-                socialScoreOperationService.removeUrlFromSocialScoreContainer(inputList.get(1));
+                socialScoreOperationService.findUrlInStoreAndRemove(inputList.get(1));
                 break;
             case EXPORT:
                 socialScoreOperationService.exportUrlSocialScores();

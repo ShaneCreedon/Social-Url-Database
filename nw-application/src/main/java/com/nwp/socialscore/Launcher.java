@@ -1,8 +1,8 @@
-package com.nw.socialscore;
+package com.nwp.socialscore;
 
-import com.nw.socialscore.repl.application.service.SocialScoreOperationService;
-import com.nw.socialscore.repl.application.service.SocialScoreReaderService;
-import com.nw.socialscore.repl.infrastructure.service.SocialScoreValidator;
+import com.nwp.socialscore.repl.application.service.SocialScoreOperationService;
+import com.nwp.socialscore.repl.application.service.SocialScoreReaderService;
+import com.nwp.socialscore.repl.infrastructure.service.SocialScoreValidator;
 
 public class Launcher {
 

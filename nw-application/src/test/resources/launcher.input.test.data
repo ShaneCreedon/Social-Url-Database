@@ -1,0 +1,11 @@
+ADD https://www.test.com 10.52
+ADD https://www.test.com/user/5 10.33
+ADD https://www.test.com/user?username=test@test.com 20.888
+ADD http://www.test.com/any 30
+ADD http://www.nw.com 90
+ADD http://www.nw.com/user/5 90
+EXPORT
+REMOVE http://www.nw.com
+REMOVE http://www.nw.com/user/5
+REMOVE http://www.test.com/any
+EXPORT

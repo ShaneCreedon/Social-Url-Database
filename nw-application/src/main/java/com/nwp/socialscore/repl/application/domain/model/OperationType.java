@@ -1,4 +1,4 @@
-package com.nw.socialscore.repl.application.domain.model;
+package com.nwp.socialscore.repl.application.domain.model;
 
 public enum OperationType {
     ADD,

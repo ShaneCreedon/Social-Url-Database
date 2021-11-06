@@ -1,6 +1,6 @@
-package com.nw.socialscore.repl.application.service;
+package com.nwp.socialscore.repl.application.service;
 
-import com.nw.socialscore.repl.application.domain.model.SocialScore;
+import com.nwp.socialscore.repl.application.domain.model.SocialScore;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.MalformedURLException;
@@ -17,8 +17,10 @@ public class SocialScoreOperationService {
                                                             "please verify the protocol is present in your url.";
     private static final String INVALID_NUMERIC_ADD_VALUE_ERROR_MESSAGE = "The value passed is not a valid numeric type [integer/decimal].";
     private static final String ITEM_NOT_FOUND_FOR_REMOVAL_ERROR = "URL cannot be removed from store as it does not exist - please try adding one first.";
+    private static final String REMOVAL_FAILURE_PROTOCOL_OR_QUERY_PARAMS_INVALID = "Failed to remove URL, domain was correct but the protocol, " +
+            "path variables, or query parameters failed to match.";
 
-    private static final Map<String, List<SocialScore>> domainToScoreMap = new HashMap<>();
+    private final Map<String, List<SocialScore>> domainToScoreMap = new HashMap<>();
 
     public void addUrlWithSocialScore(String inputUrl, String inputScore) {
         URL url = createUrlFromArgument(inputUrl);
@@ -28,20 +30,13 @@ public class SocialScoreOperationService {
         scores.add(new SocialScore(url, score));
     }
 
-    public void removeUrlFromSocialScoreContainer(String inputUrl) {
+    public void findUrlInStoreAndRemove(String inputUrl) {
         URL url = createUrlFromArgument(inputUrl);
         String domainName = getDomainNameFromUrl(url);
         if (!domainToScoreMap.containsKey(domainName)) {
             throw new IllegalStateException(ITEM_NOT_FOUND_FOR_REMOVAL_ERROR);
         } else {
-            List<SocialScore> updatedSocialScores = domainToScoreMap.get(domainName).stream()
-                    .filter(socialScore -> !socialScore.getUrl().equals(url))
-                    .collect(Collectors.toList());
-            if (updatedSocialScores.isEmpty()) {
-                domainToScoreMap.remove(domainName);
-            } else {
-                domainToScoreMap.put(domainName, updatedSocialScores);
-            }
+            removeUrlFromStore(url, domainName);
         }
     }
 
@@ -54,6 +49,20 @@ public class SocialScoreOperationService {
             String domainResult = String.format("%s;%d;%.2f", domainName, urlScoreList.size(), socialScoreForDomain.setScale(2, RoundingMode.HALF_EVEN));
             System.out.println(domainResult);
         });
+    }
+
+    private void removeUrlFromStore(URL url, String domainName) {
+        List<SocialScore> updatedSocialScores = domainToScoreMap.get(domainName).stream()
+                .filter(socialScore -> !socialScore.getUrl().equals(url))
+                .collect(Collectors.toList());
+        if (updatedSocialScores.isEmpty()) {
+            domainToScoreMap.remove(domainName);
+        } else {
+            if (updatedSocialScores.size() == domainToScoreMap.get(domainName).size()) {
+                throw new IllegalStateException(REMOVAL_FAILURE_PROTOCOL_OR_QUERY_PARAMS_INVALID);
+            }
+            domainToScoreMap.put(domainName, updatedSocialScores);
+        }
     }
 
     private BigDecimal createScoreFromArgument(String value) {
