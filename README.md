@@ -18,10 +18,13 @@ This project is based off JDK8. Some improvements to the code could be made with
 such as the Enhanced Switch statement or, text blocks for the introduction message.
 The REPL was done with the `java.util.Scanner` package which accepts input until the program is 
 exited. `System.out` is used to write output. 
-I considered using a logger, but thought it wasn't necessary for the scope of this project.
-I opt for a Guard-Clause approach around the majority of the conditional flows, as I find the
+
+Something to note, is that I allowed the scores to be decimal in nature, rather than just Integer.
+
+Also, I considered using a logger, but ultimately thought it wasn't necessary for the scope of this project.
+I opt for a Guard Clause approach around the majority of the conditional flows, as I find the
 code easier to read this way; by validating against the edge cases at the top and leaving the
-body of the method for the function purpose.
+body of the method for the method's purpose.
 
 ## Tests
 I wrote a number of Junit tests (7) to accompany this small project, those can be run with
