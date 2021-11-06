@@ -9,7 +9,7 @@ public class Launcher {
     // Note: We could use text blocks here if >= JDK v15.
     private static final String STARTUP_MESSAGE =
                     "+--------------------------------------------------------------------------+\n" +
-                    "| -------            URL Storage System Started                  -------   |\n" +
+                    "| -------            URL Storage System Started                    ------- |\n" +
                     "| Commands Available: ADD, REMOVE, EXPORT                                  |\n" +
                     "| Description: Domain's can be stored and can be compared with other URLs  |\n" +
                     "|              from their score metric.                                    |\n" +
