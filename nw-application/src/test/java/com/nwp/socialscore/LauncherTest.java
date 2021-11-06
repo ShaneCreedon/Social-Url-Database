@@ -10,7 +10,6 @@ public class LauncherTest {
 
     @Test
     public void callMain_testAllOperations_verifySystemOutput() {
-        System.out.println("main");
         final InputStream fileInputStream = this.getClass().getClassLoader().getResourceAsStream("launcher.input.test.data");
         System.setIn(fileInputStream);
 
