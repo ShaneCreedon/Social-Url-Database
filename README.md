@@ -18,8 +18,8 @@ to accomplish the same thing.
 This project is based off JDK8. Some improvements to the code could be made with future versions,
 such as the Enhanced Switch statement or, text blocks for the introduction message.
 The REPL was done with the `java.util.Scanner` package which accepts input until the program is 
-exited. `System.out` is used to write output, I considered using a logger, but thought wasn't
-necessary for the scope of this project.
+exited. `System.out` is used to write output. 
+I considered using a logger, but thought it wasn't necessary for the scope of this project.
 
 ## Tests
 I wrote a number of Junit tests (7) to accompany this small project, those can be run with
