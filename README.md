@@ -11,8 +11,7 @@ I've created some bash scripts alternatives that can be run to build the program
 these will be mentioned below.
 1. run `./build.sh` or `bash ./build.sh`, alternatively run `mvn clean package` 
 to accomplish the same thing. 
-2. `cd` into the `nw-application` module
-3. run `run.sh` or `bash ./run.sh`, alternatively run `java -jar target/nw-app.jar`
+2. run `./run.sh` or `bash ./run.sh`, alternatively `cd` into `nw-application/` and run `java -jar target/nw-app.jar`
 
 ## Approach
 This project is based off JDK8. Some improvements to the code could be made with future versions,
