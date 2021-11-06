@@ -1,4 +1,4 @@
-package com.nw.socialscore;
+package com.nw.socialscore.repl.application.domain.model;
 
 import java.math.BigDecimal;
 import java.net.URL;
