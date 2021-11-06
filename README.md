@@ -28,4 +28,9 @@ body of the method for the method's purpose.
 
 ## Tests
 I wrote a number of Junit tests (7) to accompany this small project, those can be run with
-`mvn test`
+`mvn test`.
+
+Additionally, I wrote a test to cover the case given in the 
+problem description. The output is slightly different with regard to the order of URLs 
+when exporting and that my solution allows scores with 2 decimal places, other then that
+they are identical - you can find this test in `LauncherTest::callMain_testAllOperations_withNwDataset`

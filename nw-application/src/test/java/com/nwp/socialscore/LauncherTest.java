@@ -36,4 +36,33 @@ public class LauncherTest {
         Assert.assertEquals(expectedOutput, outputStream.toString());
     }
 
+    @Test
+    public void callMain_testAllOperations_withNwDataset() {
+        final InputStream fileInputStream = this.getClass().getClassLoader().getResourceAsStream("nw.input.test.data");
+        System.setIn(fileInputStream);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        Launcher.main(null);
+
+        String expectedOutput = "+--------------------------------------------------------------------------+\n" +
+                "| -------            URL Storage System Started                    ------- |\n" +
+                "| Commands Available: ADD, REMOVE, EXPORT                                  |\n" +
+                "| Description: Domain's can be stored and can be compared with other URLs  |\n" +
+                "|              from their score metric.                                    |\n" +
+                "|              Try add, remove and export some valid URLs to see           |\n" +
+                "|              how it works!                                               |\n" +
+                "+--------------------------------------------------------------------------+\n" +
+                "\r\n" +
+                "domain;urls;social_score\r\n" +
+                "bbc.com;1;10.00\r\n" +
+                "rte.ie;2;50.00\r\n" +
+                "domain;urls;social_score\r\n" +
+                "bbc.com;1;10.00\r\n" +
+                "rte.ie;1;20.00\r\n";
+
+                Assert.assertEquals(expectedOutput, outputStream.toString());
+    }
+
 }
