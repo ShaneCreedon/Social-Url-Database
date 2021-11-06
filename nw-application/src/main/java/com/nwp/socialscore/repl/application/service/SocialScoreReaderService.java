@@ -18,8 +18,9 @@ public class SocialScoreReaderService {
 
     public void startRepl() {
         Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNext()) {
-            List<String> inputList = Arrays.asList(scanner.nextLine().split(SINGLE_WHITESPACE));
+        while (scanner.hasNextLine()) {
+            String[] input = scanner.nextLine().split(SINGLE_WHITESPACE);
+            List<String> inputList = Arrays.asList(input);
             try {
                 String commandInputItem = inputList.get(0);
                 if (socialScoreValidator.isInvalidOperationCommand(commandInputItem)) {
