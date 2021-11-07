@@ -8,41 +8,41 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SocialScoreValidatorTest {
+public class SocialScoreUrlValidatorTest {
 
-    private SocialScoreValidator socialScoreValidator;
+    private SocialScoreUrlValidator socialScoreUrlValidator;
 
     @Before
     public void setUp() {
-        this.socialScoreValidator = new SocialScoreValidator();
+        this.socialScoreUrlValidator = new SocialScoreUrlValidator();
     }
 
     @Test
     public void isInvalidOperationCommand_validatePossibleInput() {
         String command = "ADD";
-        boolean res = socialScoreValidator.isInvalidOperationCommand(command);
+        boolean res = socialScoreUrlValidator.isInvalidOperationCommand(command);
         Assert.assertFalse(res);
 
         command = "REMOVE";
-        res = socialScoreValidator.isInvalidOperationCommand(command);
+        res = socialScoreUrlValidator.isInvalidOperationCommand(command);
         Assert.assertFalse(res);
 
         command = "EXPORT";
-        res = socialScoreValidator.isInvalidOperationCommand(command);
+        res = socialScoreUrlValidator.isInvalidOperationCommand(command);
         Assert.assertFalse(res);
 
         command = "WRONG INPUT";
-        res = socialScoreValidator.isInvalidOperationCommand(command);
+        res = socialScoreUrlValidator.isInvalidOperationCommand(command);
         Assert.assertTrue(res);
     }
 
     @Test
     public void validateOperationTypeArguments_verifyValidCases_noExceptionShouldThrow() {
         List<String> input = Arrays.asList("ADD", "https://www.test.com", "50.04");
-        socialScoreValidator.validateOperationTypeArguments(input, OperationType.ADD);
+        socialScoreUrlValidator.validateOperationTypeArguments(input, OperationType.ADD);
 
         input = Arrays.asList("REMOVE", "https://www.test.com");
-        socialScoreValidator.validateOperationTypeArguments(input, OperationType.REMOVE);
+        socialScoreUrlValidator.validateOperationTypeArguments(input, OperationType.REMOVE);
     }
 
     @Test
@@ -52,25 +52,25 @@ public class SocialScoreValidatorTest {
 
         final List<String> addInputA = Arrays.asList("ADD", "https://www.test.com", "50.04", "10.53");
         IllegalStateException e = Assert.assertThrows(IllegalStateException.class,
-                () -> socialScoreValidator.validateOperationTypeArguments(addInputA, OperationType.ADD)
+                () -> socialScoreUrlValidator.validateOperationTypeArguments(addInputA, OperationType.ADD)
         );
         Assert.assertEquals(e.getMessage(), expectedErrorForAddOperation);
 
         final List<String> addInputB = Arrays.asList("ADD", "https://www.test.com");
         e = Assert.assertThrows(IllegalStateException.class,
-                () -> socialScoreValidator.validateOperationTypeArguments(addInputB, OperationType.ADD)
+                () -> socialScoreUrlValidator.validateOperationTypeArguments(addInputB, OperationType.ADD)
         );
         Assert.assertEquals(e.getMessage(), expectedErrorForAddOperation);
 
         final List<String> removeInputA = Arrays.asList("REMOVE", "https://www.test.com", "50.04");
         e = Assert.assertThrows(IllegalStateException.class,
-                () -> socialScoreValidator.validateOperationTypeArguments(removeInputA, OperationType.REMOVE)
+                () -> socialScoreUrlValidator.validateOperationTypeArguments(removeInputA, OperationType.REMOVE)
         );
         Assert.assertEquals(e.getMessage(), expectedErrorForRemoveOperation);
 
         final List<String> removeInputB = Collections.singletonList("REMOVE");
         e = Assert.assertThrows(IllegalStateException.class,
-                () -> socialScoreValidator.validateOperationTypeArguments(removeInputB, OperationType.REMOVE)
+                () -> socialScoreUrlValidator.validateOperationTypeArguments(removeInputB, OperationType.REMOVE)
         );
         Assert.assertEquals(e.getMessage(), expectedErrorForRemoveOperation);
     }

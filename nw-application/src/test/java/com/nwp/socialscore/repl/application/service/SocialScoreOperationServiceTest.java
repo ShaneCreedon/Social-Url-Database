@@ -1,5 +1,6 @@
 package com.nwp.socialscore.repl.application.service;
 
+import com.nwp.socialscore.repl.infrastructure.service.SocialScoreUrlValidator;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.Assert;
@@ -13,7 +14,8 @@ public class SocialScoreOperationServiceTest {
 
     @Before
     public void setUp() {
-        this.socialScoreOperationService = new SocialScoreOperationService();
+        SocialScoreUrlValidator socialScoreUrlValidator = new SocialScoreUrlValidator();
+        this.socialScoreOperationService = new SocialScoreOperationService(socialScoreUrlValidator);
     }
 
     @Test

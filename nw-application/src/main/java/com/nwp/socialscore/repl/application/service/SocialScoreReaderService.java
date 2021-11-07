@@ -1,7 +1,7 @@
 package com.nwp.socialscore.repl.application.service;
 
 import com.nwp.socialscore.repl.application.domain.model.OperationType;
-import com.nwp.socialscore.repl.infrastructure.service.SocialScoreValidator;
+import com.nwp.socialscore.repl.infrastructure.service.SocialScoreUrlValidator;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -13,7 +13,7 @@ public class SocialScoreReaderService {
     private static final String SINGLE_WHITESPACE = " ";
     private static final String INVALID_COMMAND_ERROR_MESSAGE = "Invalid command entered - Please use [ADD|REMOVE|EXPORT].";
 
-    private final SocialScoreValidator socialScoreValidator;
+    private final SocialScoreUrlValidator socialScoreUrlValidator;
     private final SocialScoreOperationService socialScoreOperationService;
 
     public void startRepl() {
@@ -23,11 +23,11 @@ public class SocialScoreReaderService {
             List<String> inputList = Arrays.asList(input);
             try {
                 String commandInputItem = inputList.get(0);
-                if (socialScoreValidator.isInvalidOperationCommand(commandInputItem)) {
+                if (socialScoreUrlValidator.isInvalidOperationCommand(commandInputItem)) {
                     throw new IllegalStateException(INVALID_COMMAND_ERROR_MESSAGE);
                 }
                 OperationType operationType = OperationType.valueOf(commandInputItem);
-                socialScoreValidator.validateOperationTypeArguments(inputList, operationType);
+                socialScoreUrlValidator.validateOperationTypeArguments(inputList, operationType);
                 performOperation(inputList, operationType);
             } catch (IllegalStateException e) {
                 System.err.println(e.getMessage());

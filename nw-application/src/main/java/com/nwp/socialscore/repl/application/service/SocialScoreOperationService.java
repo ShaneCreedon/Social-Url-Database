@@ -1,6 +1,7 @@
 package com.nwp.socialscore.repl.application.service;
 
 import com.nwp.socialscore.repl.application.domain.model.SocialScore;
+import com.nwp.socialscore.repl.infrastructure.service.SocialScoreUrlValidator;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.MalformedURLException;
@@ -10,7 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class SocialScoreOperationService {
 
     private static final String INVALID_URL_ERROR_MESSAGE = "Invalid URL passed when performing ADD/REMOVE operation, " +
@@ -20,14 +23,20 @@ public class SocialScoreOperationService {
     private static final String REMOVAL_FAILURE_PROTOCOL_OR_QUERY_PARAMS_INVALID = "Failed to remove URL, domain was correct but the protocol, " +
             "path variables, or query parameters failed to match.";
 
+    private final SocialScoreUrlValidator socialScoreUrlValidator;
+
     private final Map<String, List<SocialScore>> domainToScoreMap = new HashMap<>();
 
     public void addUrlWithSocialScore(String inputUrl, String inputScore) {
-        URL url = createUrlFromArgument(inputUrl);
-        BigDecimal score = createScoreFromArgument(inputScore);
-        String domainName = getDomainNameFromUrl(url);
-        List<SocialScore> scores = domainToScoreMap.computeIfAbsent(domainName, (domain -> new ArrayList<>()));
-        scores.add(new SocialScore(url, score));
+        if (socialScoreUrlValidator.isValidUrl(inputUrl)) {
+            URL url = createUrlFromArgument(inputUrl);
+            BigDecimal score = createScoreFromArgument(inputScore);
+            String domainName = getDomainNameFromUrl(url);
+            List<SocialScore> scores = domainToScoreMap.computeIfAbsent(domainName, (domain -> new ArrayList<>()));
+            scores.add(new SocialScore(url, score));
+        } else {
+            throw new IllegalStateException(INVALID_URL_ERROR_MESSAGE);
+        }
     }
 
     public void findUrlInStoreAndRemove(String inputUrl) {

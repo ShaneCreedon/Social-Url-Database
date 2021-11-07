@@ -2,7 +2,7 @@ package com.nwp.socialscore;
 
 import com.nwp.socialscore.repl.application.service.SocialScoreOperationService;
 import com.nwp.socialscore.repl.application.service.SocialScoreReaderService;
-import com.nwp.socialscore.repl.infrastructure.service.SocialScoreValidator;
+import com.nwp.socialscore.repl.infrastructure.service.SocialScoreUrlValidator;
 
 public class Launcher {
 
@@ -19,9 +19,9 @@ public class Launcher {
 
     public static void main(String[] args) {
         System.out.println(STARTUP_MESSAGE);
-        SocialScoreValidator socialScoreValidator = new SocialScoreValidator();
-        SocialScoreOperationService socialScoreOperationService = new SocialScoreOperationService();
-        SocialScoreReaderService socialScoreReaderService = new SocialScoreReaderService(socialScoreValidator, socialScoreOperationService);
+        SocialScoreUrlValidator socialScoreUrlValidator = new SocialScoreUrlValidator();
+        SocialScoreOperationService socialScoreOperationService = new SocialScoreOperationService(socialScoreUrlValidator);
+        SocialScoreReaderService socialScoreReaderService = new SocialScoreReaderService(socialScoreUrlValidator, socialScoreOperationService);
         socialScoreReaderService.startRepl();
     }
 }

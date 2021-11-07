@@ -5,11 +5,14 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.apache.commons.validator.UrlValidator;
 
-public class SocialScoreValidator {
+public class SocialScoreUrlValidator {
 
     private static final String ADD_ARGS_LENGTH_ERROR_MESSAGE = "Invalid input - The 'ADD' operation requires 2 subsequent arguments.";
     private static final String REMOVE_ARGS_LENGTH_ERROR_MESSAGE = "Invalid input - The 'REMOVE' operation requires 1 subsequent argument.";
+
+    private final UrlValidator urlValidator = new UrlValidator();
 
     private static final Set<String> operationTypes = EnumSet.allOf(OperationType.class).stream()
             .map(OperationType::name)
@@ -17,6 +20,10 @@ public class SocialScoreValidator {
 
     public boolean isInvalidOperationCommand(String commandInputItem) {
         return !operationTypes.contains(commandInputItem);
+    }
+
+    public boolean isValidUrl(String url) {
+        return urlValidator.isValid(url);
     }
 
     public void validateOperationTypeArguments(List<String> inputList, OperationType operationType) {
