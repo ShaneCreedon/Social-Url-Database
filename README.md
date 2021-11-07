@@ -22,9 +22,13 @@ exited. `System.out` is used to write output.
 Something to note, is that I allowed the scores to be decimal in nature, rather than just Integer.
 
 Also, I considered using a logger, but ultimately thought it wasn't necessary for the scope of this project.
-I opt for a Guard Clause approach around the majority of the conditional flows, as I find the
+I opted for a Guard Clause approach around the majority of the conditional flows, as I find the
 code easier to read this way; by validating against the edge cases at the top and leaving the
 body of the method for the method's purpose.
+
+`java.net.URL` did not provide enough built-in validation for checking against URLs, so I needed
+to add further validation on top of this to ensure commands like: `ADD https:///www. 5.02` 
+would be invalid.
 
 ## Tests
 I wrote a number of Junit tests (8) to accompany this small project, those can be run with
@@ -32,5 +36,5 @@ I wrote a number of Junit tests (8) to accompany this small project, those can b
 
 Additionally, I wrote a test to cover the case given in the 
 problem description. The output is slightly different with regard to the order of URLs 
-when exporting and that my solution allows scores with 2 decimal places, other then that
+when exporting and that my solution allows scores with 2 decimal places, other than that
 they are identical - you can find this test in `LauncherTest::callMain_testAllOperations_withNwDataset`
