@@ -27,7 +27,7 @@ code easier to read this way; by validating against the edge cases at the top an
 body of the method for the method's purpose.
 
 ## Tests
-I wrote a number of Junit tests (7) to accompany this small project, those can be run with
+I wrote a number of Junit tests (8) to accompany this small project, those can be run with
 `mvn test`.
 
 Additionally, I wrote a test to cover the case given in the 
