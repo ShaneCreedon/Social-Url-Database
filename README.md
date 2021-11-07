@@ -21,6 +21,12 @@ exited. `System.out` is used to write output.
 
 Something to note, is that I allowed the scores to be decimal in nature, rather than just Integer.
 
+The project was structured with 1 sub-module with it's own `pom`. This was done
+in the scenario this project could be extended in the future and more modules may be added.
+The parent ``pom`` controls the versions of all the dependencies and the child `poms` 
+can include these dependencies selectively without the version - as it will be 
+inherited from the parent.
+
 Also, I considered using a logger, but ultimately thought it wasn't necessary for the scope of this project.
 I opted for a Guard Clause approach around the majority of the conditional flows, as I find the
 code easier to read this way; by validating against the edge cases at the top and leaving the
