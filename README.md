@@ -30,7 +30,7 @@ inherited from the parent.
 Also, I considered using a logger, but ultimately thought it wasn't necessary for the scope of this project.
 I opted for a Guard Clause approach around the majority of the conditional flows, as I find the
 code easier to read this way; by validating against the edge cases at the top and leaving the
-body of the method for the method's purpose.
+body of the method for the service logic.
 
 `java.net.URL` did not provide enough built-in validation for checking against URLs, so I needed
 to add further validation on top of this to ensure commands like: `ADD https:///www. 5.02` 
